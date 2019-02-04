@@ -45,14 +45,18 @@
                     </tr>
                     </tfoot>
                     <tbody>
-                    <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                        <td>New York</td>
-                        <td>27</td>
-                        <td>2011/01/25</td>
-                        <td>$112,000</td>
-                    </tr>
+                    @if("semesters")
+                        @foreach($semesters as $semester)
+                            <tr>
+                                <td>{{ $semester->academic_year }}</td>
+                                <td>{{ $semester->number }}</td>
+                                <td></td>
+                                <td>27</td>
+                                <td>2011/01/25</td>
+                                <td>$112,000</td>
+                            </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
