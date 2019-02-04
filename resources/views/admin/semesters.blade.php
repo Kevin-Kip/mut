@@ -50,10 +50,17 @@
                             <tr>
                                 <td>{{ $semester->academic_year }}</td>
                                 <td>{{ $semester->number }}</td>
-                                <td></td>
-                                <td>27</td>
-                                <td>2011/01/25</td>
-                                <td>$112,000</td>
+                                <td>35%</td>
+                                <td>65%</td>
+                                <td>
+                                    @if ($semester->status == 0)
+                                        <span class="badge badge-pill badge-success">Open</span>
+                                    @elseif($semester-> status == 1)
+                                        <span class="badge badge-pill badge-danger">Closed</span>
+                                    @endif
+                                </td>
+                                <td>{{ $semester->start_date }}</td>
+                                <td>{{ $semester->end_date }}</td>
                             </tr>
                         @endforeach
                         @endif
