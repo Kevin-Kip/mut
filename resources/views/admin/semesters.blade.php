@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="text-white">
-        <a class="btn btn-primary" href="{{ url('/admin') }}">
+        <a class="btn btn-primary" href="{{ route('semester.create') }}">
             <i class="fa fa-plus"></i>
             New Session
         </a>

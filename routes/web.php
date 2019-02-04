@@ -11,13 +11,14 @@
 |
 */
 
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
+Route::get('/admin', [
+    'as' => 'admin.home',
+    'uses' => 'AdminController@index'
+]);
 
 Route::get('/admin/semesters', [
     'as' => 'admin.semesters',
-    'uses' => 'AdminController@index'
+    'uses' => 'AdminController@semesters'
 ]);
 
 Route::get('/auth/login', [
@@ -28,4 +29,13 @@ Route::get('/auth/login', [
 Route::post('/auth/login', [
    'as' => 'user.signin',
    'uses' => 'UserController@signUserIn'
+]);
+
+Route::get('/admin/semesters/create', [
+   'as' => 'semester.create' ,
+    'uses' => 'SemesterController@create'
+]);
+Route::post('/admin/semesters/create', [
+    'as' => 'semester.save' ,
+    'uses' => 'SemesterController@store'
 ]);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Semester;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.semesters');
+        return view('admin.dashboard');
     }
 
     /**
@@ -21,9 +22,10 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function semesters()
     {
-        //
+        $semesters = Semester::all();
+        return view('admin.semesters')->with(['semesters'=>$semesters]);
     }
 
     /**
