@@ -48,7 +48,8 @@
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
             <div class="text-center">
-                {{--<a class="d-block small" href="{{ route('password.request') }}">Forgot Password?</a>--}}
+                <p></p>
+                <a class="d-block small" href="{{ route('user.signup') }}">Create Account</a>
                 {{--TODO add password reset--}}
             </div>
         </div>

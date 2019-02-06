@@ -54,9 +54,23 @@
             <span>Semesters</span></a>
         </li>
         <li class="nav-item @yield('isStudents')">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link" href="">
             <i class="fas fa-fw fa-user-circle"></i>
             <span>Students</span></a>
+        </li>
+
+        <li class="nav-item @yield('isStudents')">
+          @if(session()->has('user'))
+            @if(session()->get('user')->role == "Admin")
+              <a class="nav-link" href="{{ url('/logout') }}">
+                <i class="fas fa-fw fa-lock"></i>
+                <span>Log Out</span></a>
+            @else
+              <script>window.location = "/auth/login"</script>
+            @endif
+          @else
+            <script>window.location = "/auth/login"</script>
+          @endif
         </li>
       </ul>
 

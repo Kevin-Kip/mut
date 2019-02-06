@@ -97,7 +97,8 @@
                 <button type="submit" class="btn btn-primary btn-block">CONTINUE</button>
             </form>
             <div class="text-center">
-                {{--<a class="d-block small" href="{{ route('password.request') }}">Forgot Password?</a>--}}
+                <p></p>
+                <a class="d-block small" href="{{ route('user.signin') }}">Go to Login</a>
                 {{--TODO add password reset--}}
             </div>
         </div>

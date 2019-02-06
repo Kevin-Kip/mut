@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Semester;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
@@ -88,7 +89,8 @@ class UserController extends Controller
         ]);
 
         if ($student){
-            return redirect()->route('students.home');
+            $semesters = Semester::all();
+            return redirect()->route('students.home', compact('semesters'));
         }
         return $request->all();
     }

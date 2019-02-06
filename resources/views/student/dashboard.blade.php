@@ -83,7 +83,16 @@
                 <li class="breadcrumb-item active">@yield('current-page')</li>
             </ol>
 
-            @yield('content')
+            @if('semesters')
+                <div class="text-white">
+                    <a class="btn btn-primary" href="#">
+                        <i class="fa fa-plus"></i>
+                        Report for Session
+                    </a>
+                </div>
+                <p></p>
+            @endif
+            {{--@yield('content')--}}
 
         </div>
         <!-- /.container-fluid -->
@@ -121,7 +130,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="#">Logout</a>
             </div>
         </div>
     </div>

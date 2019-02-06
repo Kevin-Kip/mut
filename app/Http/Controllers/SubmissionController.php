@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Semester;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class SubmissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $semesters = Semester::all();
-        return view('student.dashboard', compact('semesters'));
+        //
     }
 
     /**
