@@ -48,6 +48,7 @@ class SemesterController extends Controller
         $end_date = $request['end_date'];
         $status = 0;
         $semester_no = $request['semester_no'];
+        $program = $request['program'];
 
         if ($start_date >= $end_date){
             return redirect()->back()->with(['message' => "date-error"]);
@@ -58,7 +59,8 @@ class SemesterController extends Controller
                 'start_date' => $start_date,
                 'end_date' => $end_date,
                 'fees' => $fees,
-                'number' => $semester_no
+                'number' => $semester_no,
+                'program' => $program
             ]);
             if ($semester){
                 $result = "success";
@@ -94,7 +96,7 @@ class SemesterController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Httleastp\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

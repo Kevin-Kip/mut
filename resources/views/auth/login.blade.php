@@ -21,7 +21,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#">Go Home</a>
+    {{--<a class="navbar-brand" href="#">Go Home</a>--}}
     <div class="collapse navbar-collapse" id="navbarResponsive">
     </div>
 </nav>

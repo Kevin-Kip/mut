@@ -45,6 +45,21 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="program">Program:</label>
+                        <select class="form-control" name="program" id="program" required autofocus>
+                            <option disabled selected value> -- select an option -- </option>
+                            <option value="Certificate">Certificate</option>
+                            <option value="Diploma">Diploma</option>
+                            <option value="Undergraduate">Undergraduate</option>
+                            <option value="Masters">Masters</option>
+                            <option value="PhD">PhD</option>
+                        </select>
+                        @if($errors->has('program') )
+                            <span class="text-danger">{{ $errors->first('program') }}</span>
+                        @endif
+                    </div>
+
+                    <div class="form-group">
                         <label for="semester_no">Semester Number:</label>
                         <select class="form-control" name="semester_no" id="semester_no" required autofocus>
                             <option disabled selected value> -- select an option -- </option>

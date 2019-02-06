@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function (){
+    return view('welcome');
+});
+
 Route::get('/admin', [
     'as' => 'admin.home',
     'uses' => 'AdminController@index'
@@ -31,6 +35,21 @@ Route::post('/auth/login', [
    'uses' => 'UserController@signUserIn'
 ]);
 
+Route::get('/auth/register', [
+    'as' => 'register',
+    'uses' => 'UserController@showRegister'
+]);
+
+Route::post('/auth/register', [
+    'as' => 'user.signup',
+    'uses' => 'UserController@createUser'
+]);
+
+Route::get('/logout', [
+    'as' => 'logout',
+    'uses' => 'UserController@destroy'
+]);
+
 Route::get('/admin/semesters/create', [
    'as' => 'semester.create' ,
     'uses' => 'SemesterController@create'
@@ -38,4 +57,9 @@ Route::get('/admin/semesters/create', [
 Route::post('/admin/semesters/create', [
     'as' => 'semester.save' ,
     'uses' => 'SemesterController@store'
+]);
+
+Route::get('/students', [
+    'as' => 'students.home',
+    'uses' => 'StudentController@index'
 ]);

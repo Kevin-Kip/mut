@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Semester;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $activeSems = Semester::where('status','=',0)->count();
+        $semesters = DB::table('semesters')->take(3)->get();
+//        return $semesters;
+        return view('admin.dashboard')->with(['activeSems' => $activeSems, 'semesters' => $semesters]);
     }
 
     /**
@@ -24,7 +28,7 @@ class AdminController extends Controller
      */
     public function semesters()
     {
-        $semesters = Semester::all();
+        $semesters = DB::table('semesters')->paginate(10);
         return view('admin.semesters')->with(['semesters'=>$semesters]);
     }
 
