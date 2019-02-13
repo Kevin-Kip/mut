@@ -14,7 +14,11 @@ class CreateTranscriptsTable extends Migration
     public function up()
     {
         Schema::create('transcripts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('transcript_id');
+            $table->increments('transcript_id');
+            $table->increments('transcript_id');
+            $table->increments('transcript_id');
+            $table->increments('transcript_id');
             $table->timestamps();
         });
     }

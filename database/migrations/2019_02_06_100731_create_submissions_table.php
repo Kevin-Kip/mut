@@ -14,7 +14,11 @@ class CreateSubmissionsTable extends Migration
     public function up()
     {
         Schema::create('submissions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('submission_id');
+            $table->increments('student');
+            $table->foreign('student')->references('student_id')->on('students');
+            $table->increments('semester');
+            $table->foreign('semester')->references('semester_id')->on('semesters');
             $table->timestamps();
         });
     }
