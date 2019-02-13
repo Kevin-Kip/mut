@@ -30,12 +30,22 @@ Route::get('/auth/login', [
     'uses' => 'UserController@showLogin'
 ]);
 
+Route::get('/login', [
+    'as' => 'login',
+    'uses' => 'UserController@showLogin'
+]);
+
 Route::post('/auth/login', [
    'as' => 'user.signin',
    'uses' => 'UserController@signUserIn'
 ]);
 
 Route::get('/auth/register', [
+    'as' => 'register',
+    'uses' => 'UserController@showRegister'
+]);
+
+Route::get('/register', [
     'as' => 'register',
     'uses' => 'UserController@showRegister'
 ]);
