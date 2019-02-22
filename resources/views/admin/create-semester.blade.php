@@ -46,7 +46,7 @@
 
                     <div class="form-group">
                         <label for="program">Program:</label>
-                        <select class="form-control" name="program" id="program" required autofocus>
+                        <select class="form-control" name="program" id="program" required>
                             <option disabled selected value> -- select an option -- </option>
                             <option value="Certificate">Certificate</option>
                             <option value="Diploma">Diploma</option>
@@ -61,13 +61,26 @@
 
                     <div class="form-group">
                         <label for="semester_no">Semester Number:</label>
-                        <select class="form-control" name="semester_no" id="semester_no" required autofocus>
+                        <select class="form-control" name="semester_no" id="semester_no" required>
                             <option disabled selected value> -- select an option -- </option>
                             <option value="1">1st Semester</option>
                             <option value="2">2nd Semester</option>
+                            <option value="3">3rd Semester</option>
                         </select>
                         @if($errors->has('semester_no') )
                             <span class="text-danger">{{ $errors->first('semester_no') }}</span>
+                        @endif
+                    </div>
+
+                    <div class="form-group">
+                        <label for="student_category">Student Category:</label>
+                        <select class="form-control" name="student_category" id="student_category" required>
+                            <option disabled selected value> -- select an option -- </option>
+                            <option value="1">Government Sponsored</option>
+                            <option value="2">Self Sponsored</option>
+                        </select>
+                        @if($errors->has('student_category') )
+                            <span class="text-danger">{{ $errors->first('student_category') }}</span>
                         @endif
                     </div>
 

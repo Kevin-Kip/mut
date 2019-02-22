@@ -21,6 +21,7 @@ class CreateSemestersTable extends Migration
             $table->integer('number');
             $table->integer('status');
             $table->date('start_date');
+            $table->string('student_category');
             $table->date('end_date');
             $table->timestamps();
         });
