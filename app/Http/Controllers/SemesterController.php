@@ -113,6 +113,13 @@ class SemesterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sem = Semester::where('semester_id', $id)->first();
+        if ($sem->delete()) {
+            $message = "success";
+        } else {
+            $message = "error";
+        }
+
+        return redirect()->back()->with('message',$message);
     }
 }

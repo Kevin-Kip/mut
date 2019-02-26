@@ -32,10 +32,10 @@
             <form method="post" action="{{ route('user.signin') }}" autocomplete="off">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input class="form-control" id="email" name="email" type="email" aria-describedby="emailHelp" required placeholder="Enter email" autocomplete="false">
-                    @if($errors->has('email') )
-                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                    <label for="reg_no">Registration Number</label>
+                    <input class="form-control" id="reg_no" name="reg_no" type="text" required placeholder="Registration number ..." autocomplete="false">
+                    @if($errors->has('reg_no') )
+                        <span class="text-danger">{{ $errors->first('reg_no') }}</span>
                     @endif
                 </div>
                 <div class="form-group">

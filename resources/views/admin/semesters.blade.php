@@ -14,6 +14,24 @@
     </div>
     <p></p>
 
+    @if('message')
+        @if(session()->get('message') == "success")
+            <div class="alert alert-success alert-dismissible show" role="alert">
+                <strong>Success!</strong> Deleted Successfully
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @elseif(session()->get('message') == "error")
+            <div class="alert alert-danger alert-dismissible show" role="alert">
+                <strong>Ooops!</strong> Unable to delete
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+    @endif
+
     <!-- DataTables Example -->
     <div class="card mb-3">
         <div class="card-header">
@@ -60,7 +78,12 @@
                                     @endif
                                 </td>
                                 <th><a href="#" class="btn btn-primary">Edit</a></th>
-                                <th><a href="#" class="btn btn-danger">Delete</a></th>
+                                <th>
+                                    <form method="post" action="{{ route('semester.delete',['id' => $semester->semester_id]) }}">
+                                        {{ csrf_field() }}
+                                        <input type="submit" class="btn btn-danger" value="Delete"/>
+                                    </form>
+                                </th>
                             </tr>
                         @endforeach
                         @endif

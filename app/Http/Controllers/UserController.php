@@ -21,18 +21,22 @@ class UserController extends Controller
      */
     public function signUserIn(Request $request) {
         $this->validate($request,[
-            'email' => 'required|max:30|min:5',
+            'reg_no' => 'required|max:30|min:5',
             'password'=>'required|min:6|max:12'
         ], [
-            'email.required' => "Email is required",
-            'email.min' => "Email is too short",
-            'email.max' => "Email should not exceed 30 characters",
+            'reg_no.required' => "Field is required",
+            'reg_no.min' => "Email is too short",
+            'reg_no.max' => "Email should not exceed 30 characters",
             'password.required' => "Password is required",
             'password.min' => "Password should be at least 6 characters",
             'password.max' => "Password cannot exceed 12 characters"
         ]);
 
-        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
+        $reg = $request['reg_no'];
+        $user = Student::where('registration', $reg)->first();
+        $email = $user->email;
+
+        if (Auth::attempt(['email' => $email, 'password' => $request['password']])) {
             $user = Auth::user();
             $user = User::where('email','=',$user->email)->first();
             Session::put('user',$user);

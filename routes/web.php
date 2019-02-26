@@ -73,3 +73,8 @@ Route::get('/students', [
     'as' => 'students.home',
     'uses' => 'StudentController@index'
 ]);
+
+Route::post('/admin/semesters/{id}/delete', [
+   'as' => 'semester.delete',
+   'uses' => 'SemesterController@destroy'
+]);
