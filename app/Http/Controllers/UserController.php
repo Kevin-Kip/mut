@@ -18,6 +18,7 @@ class UserController extends Controller
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
      */
     public function signUserIn(Request $request) {
