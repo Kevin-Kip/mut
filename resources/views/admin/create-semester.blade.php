@@ -37,7 +37,11 @@
                         <label for="academic_year">Academic year:</label>
                         <select class="form-control" name="academic_year" id="academic_year" required autofocus>
                             <option disabled selected value> -- select an option -- </option>
-                            <option>2018/2019</option>
+                            @if("years")
+                                @foreach($years as $year)
+                                    <option>{{ $year }}</option>
+                                @endforeach
+                            @endif
                         </select>
                         @if($errors->has('academic-year') )
                             <span class="text-danger">{{ $errors->first('academic-year') }}</span>
@@ -48,11 +52,9 @@
                         <label for="program">Program:</label>
                         <select class="form-control" name="program" id="program" required>
                             <option disabled selected value> -- select an option -- </option>
-                            <option value="Certificate">Certificate</option>
-                            <option value="Diploma">Diploma</option>
-                            <option value="Undergraduate">Undergraduate</option>
-                            <option value="Masters">Masters</option>
-                            <option value="PhD">PhD</option>
+                            @foreach($programs as $program)
+                                <option value="{{ $program->name }}">{{ $program->name }}</option>
+                            @endforeach
                         </select>
                         @if($errors->has('program') )
                             <span class="text-danger">{{ $errors->first('program') }}</span>

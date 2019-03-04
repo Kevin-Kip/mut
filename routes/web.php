@@ -69,6 +69,15 @@ Route::post('/admin/semesters/create', [
     'uses' => 'SemesterController@store'
 ]);
 
+Route::get('/admin/semesters/{id}/edit', [
+    'as' => 'semester.edit' ,
+    'uses' => 'SemesterController@edit'
+]);
+Route::post('/admin/semesters/{id}/edit', [
+    'as' => 'semester.update' ,
+    'uses' => 'SemesterController@update'
+]);
+
 Route::get('/students', [
     'as' => 'students.home',
     'uses' => 'StudentController@index'

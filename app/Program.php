@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transcript extends Model
+class Program extends Model
 {
+    protected $primaryKey = "program_id";
+
     protected $fillable = [
-        'transcript_id',
-        'student',
-        'semester'
+      "name"
     ];
 }

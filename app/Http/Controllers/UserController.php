@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Program;
 use App\Semester;
 use App\Student;
 use App\User;
@@ -49,7 +50,8 @@ class UserController extends Controller
     }
 
     public function showRegister() {
-        return view('auth.register');
+        $programs = Program::all();
+        return view('auth.register')->with(["programs" => $programs]);
     }
 
     /**

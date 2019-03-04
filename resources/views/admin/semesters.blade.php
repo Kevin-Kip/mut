@@ -77,7 +77,12 @@
                                         <span class="badge badge-pill badge-danger">Closed</span>
                                     @endif
                                 </td>
-                                <th><a href="#" class="btn btn-primary">Edit</a></th>
+                                <th>
+                                    <form method="get" action="{{ route('semester.edit',['id' => $semester->semester_id]) }}">
+                                        {{ csrf_field() }}
+                                        <input type="submit" class="btn btn-primary" value="Edit"/>
+                                    </form>
+                                </th>
                                 <th>
                                     <form method="post" action="{{ route('semester.delete',['id' => $semester->semester_id]) }}">
                                         {{ csrf_field() }}

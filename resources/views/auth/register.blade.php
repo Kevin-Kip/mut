@@ -68,11 +68,9 @@
                     <label for="program">Program:</label>
                     <select class="form-control" name="program" id="program" required autofocus>
                         <option disabled selected value> -- select an option -- </option>
-                        <option value="Certificate">Certificate</option>
-                        <option value="Diploma">Diploma</option>
-                        <option value="Undergraduate">Undergraduate</option>
-                        <option value="Masters">Masters</option>
-                        <option value="PhD">PhD</option>
+                        @foreach($programs as $program)
+                            <option value="{{ $program->name }}">{{ $program->name }}</option>
+                        @endforeach
                     </select>
                     @if($errors->has('program') )
                         <span class="text-danger">{{ $errors->first('program') }}</span>

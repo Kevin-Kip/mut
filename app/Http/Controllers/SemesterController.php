@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Program;
 use App\Semester;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,14 @@ class SemesterController extends Controller
      */
     public function create()
     {
-        return view('admin.create-semester');
+        $startYear = date("Y");
+        $endYear = $startYear + 1;
+        $prevYear = $startYear - 1;
+        $years1 = $prevYear."/".$startYear;
+        $years2 = $startYear."/".$endYear;
+        $years = array($years1, $years2);
+        $programs = Program::all();
+        return view('admin.create-semester')->with(['years' => $years, "programs" => $programs]);
     }
 
     /**
@@ -49,6 +57,7 @@ class SemesterController extends Controller
         $status = 0;
         $semester_no = $request['semester_no'];
         $program = $request['program'];
+        $student_category = $request['student_category'];
 
         if ($start_date >= $end_date){
             return redirect()->back()->with(['message' => "date-error"]);
@@ -60,7 +69,8 @@ class SemesterController extends Controller
                 'end_date' => $end_date,
                 'fees' => $fees,
                 'number' => $semester_no,
-                'program' => $program
+                'program' => $program,
+                'student_category' => $student_category
             ]);
             if ($semester){
                 $result = "success";
@@ -79,7 +89,7 @@ class SemesterController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -90,19 +100,32 @@ class SemesterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $startYear = date("Y");
+        $endYear = $startYear + 1;
+        $prevYear = $startYear - 1;
+        $years1 = $prevYear."/".$startYear;
+        $years2 = $startYear."/".$endYear;
+        $years = array($years1, $years2);
+        $semester = Semester::where('semester_id', $id)->first();
+        $programs = Program::all();
+        return view('admin.edit-semester')->with(["semester" => $semester, "years" => $years, "programs" => $programs]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Httleastp\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $semester = Semester::where('semester_id', $id)->first();
+
+        if ($semester->update($request->except('_token'))) $message = "success";
+        else $message = "error";
+
+        return redirect()->back()->with(["message" => $message]);
     }
 
     /**
@@ -114,11 +137,9 @@ class SemesterController extends Controller
     public function destroy($id)
     {
         $sem = Semester::where('semester_id', $id)->first();
-        if ($sem->delete()) {
-            $message = "success";
-        } else {
-            $message = "error";
-        }
+
+        if ($sem->delete()) $message = "success";
+        else $message = "error";
 
         return redirect()->back()->with('message',$message);
     }

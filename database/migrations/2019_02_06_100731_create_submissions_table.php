@@ -15,10 +15,10 @@ class CreateSubmissionsTable extends Migration
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->increments('submission_id');
-            $table->increments('student');
-            $table->foreign('student')->references('student_id')->on('students');
-            $table->increments('semester');
-            $table->foreign('semester')->references('semester_id')->on('semesters');
+            $table->integer('student');
+//            $table->foreign('student')->references('student_id')->on('students');
+            $table->integer('semester');
+//            $table->foreign('semester')->references('semester_id')->on('semesters');
             $table->timestamps();
         });
     }

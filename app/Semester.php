@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static where(string $string, int $id)
+ */
 class Semester extends Model
 {
     protected $primaryKey = 'semester_id';
