@@ -14,7 +14,12 @@ class CreateTranscriptsTable extends Migration
     public function up()
     {
         Schema::create('transcripts', function (Blueprint $table) {
-            $table->increments('transcript_id');
+            $table->increments('transcript_id')->unsigned();
+            $table->integer('student')->unsigned();
+            $table->foreign('student')->references('student_id')->on('students');
+            $table->integer('semester')->unsigned();
+            $table->foreign('semester')->references('semester_id')->on('semesters');
+            $table->string('performance');
             $table->timestamps();
         });
     }
