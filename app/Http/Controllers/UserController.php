@@ -93,13 +93,13 @@ class UserController extends Controller
         $email = $request['email'];
         $password = $request['password'];
 
-        User::create([
+        $user = User::create([
             'name' => $name,
             'email' => $email,
             'password' => bcrypt($password),
             'role' => "Student"
         ]);
-
+        Session::put('user',$user);
         $student = Student::create([
             'name' => $name,
             'registration' => $request['registration'],

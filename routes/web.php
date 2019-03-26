@@ -61,6 +61,11 @@ Route::get('/admin/login', [
     'uses' => 'AdminController@showAdminLogin'
 ]);
 
+Route::post('/admin/login', [
+    'as' => 'admin.signin',
+    'uses' => 'AdminController@adminLogin'
+]);
+
 Route::get('/logout', [
     'as' => 'logout',
     'uses' => 'UserController@destroy'

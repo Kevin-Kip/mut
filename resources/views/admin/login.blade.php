@@ -29,7 +29,7 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Admin Login</div>
         <div class="card-body">
-            <form method="post" action="{{ route('user.signin') }}" autocomplete="off">
+            <form method="post" action="{{ route('admin.signin') }}" autocomplete="off">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="email">Email</label>
