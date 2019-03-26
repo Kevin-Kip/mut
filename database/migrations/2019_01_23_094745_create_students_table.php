@@ -19,6 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('registration')->unique();
             $table->string('name');
             $table->string('program');
+            $table->float('fee_balance');
             $table->timestamps();
         });
     }

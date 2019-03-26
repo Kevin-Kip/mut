@@ -83,14 +83,35 @@
                 <li class="breadcrumb-item active">@yield('current-page')</li>
             </ol>
 
-            @if('semesters')
+            @if($transcript[0]->performance == "Pass" && $semester->status == 0
+            && $student->fee_balance < ($semester->fees * 0.75))
+
                 <div class="text-white">
-                    <a class="btn btn-primary" href="#">
-                        <i class="fa fa-plus"></i>
-                        Report for Session
-                    </a>
+                    <form action="{{ route('students.report') }}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="student" value="{{ $student->student_id }}">
+                        <input type="hidden" name="semester" value="{{ $semester->semester_id }}">
+                        <input type="submit" value="Report for Session" class="btn btn-primary" href="#">
+                            <i class="fa fa-plus"></i>
+                    </form>
                 </div>
                 <p></p>
+
+            @else
+                <p><strong>You cannot report because:</strong></p>
+
+                <ul>
+                    @if($transcript[0]->performance == "Fail")
+                        <li>You failed in the last academic year</li>
+                    @endif
+                    @if($semester->status == 1)
+                        <li>Registartion period for your program has been closed</li>
+                    @endif
+                    @if($student->fee_balance > ($semester->fees * 0.75))
+                        <li>You need to pay at least 75% of school fees and clear previous balances to proceed</li>
+                    @endif
+                </ul>
+
             @endif
             {{--@yield('content')--}}
 
@@ -101,7 +122,7 @@
         <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright © Your Website 2018</span>
+                    <span>Copyright © Your Website 2019</span>
                 </div>
             </div>
         </footer>
@@ -118,7 +139,8 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

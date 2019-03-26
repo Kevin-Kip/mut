@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Semester;
+use App\Student;
+use App\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
@@ -14,8 +18,12 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $semesters = Semester::all();
-        return view('student.dashboard', compact('semesters'));
+        $user = Session::get('user');
+        $student = Student::where('email',$user->email)->first();
+        $semester = Semester::where(['program' => $student->program, 'status' => 0])->first();
+        $transcript = DB::table('transcripts')->orderBy('created_at', 'desc')->get();
+        $submission = Submission::where(['student'=>$student->student_id, 'semester'=>$semester->semester_id])->first();
+        return view('student.dashboard')->with(['submission'=>$submission, 'student'=>$student, 'semester'=>$semester, 'transcript'=>$transcript]);
     }
 
     /**
@@ -36,7 +44,17 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        return $request->all();
+        $submission = Submission::where(['student'=>$request['student'], 'semester'=>$request['semester']])->first();
+        if ($submission == null){
+            $s = Submission::create([
+                'student' => $request['student'],
+                'semester' => $request['semester']
+            ]);
+            if ($s){
+                
+            }
+        }
     }
 
     /**

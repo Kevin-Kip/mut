@@ -21,6 +21,42 @@ class AdminController extends Controller
         return view('admin.dashboard')->with(['activeSems' => $activeSems, 'semesters' => $semesters]);
     }
 
+    public function showAdminLogin() {
+        return view('admin.login');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function adminLogin(Request $request) {
+        $this->validate($request,[
+            'email' => 'required|max:30|min:5',
+            'password'=>'required|min:6|max:12'
+        ], [
+            'email.required' => "Field is required",
+            'email.min' => "Email is too short",
+            'email.max' => "Email should not exceed 30 characters",
+            'password.required' => "Password is required",
+            'password.min' => "Password should be at least 6 characters",
+            'password.max' => "Password cannot exceed 12 characters"
+        ]);
+
+        $email = $request['email'];
+
+        if (Auth::attempt(['email' => $email, 'password' => $request['password']])) {
+            $user = Auth::user();
+            $user = User::where('email','=',$user->email)->first();
+            Session::put('user',$user);
+            if ($user->role == "Admin"){
+                return redirect()->route('admin.home');
+            } else {
+                return redirect()->route('login');
+            }
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

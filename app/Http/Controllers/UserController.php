@@ -12,6 +12,19 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function index() {
+        $user = Session::get('user');
+        if ($user == null) return redirect()->route('login');
+        else{
+            if ($user->role == "Student") return redirect()->route('students.home');
+            else if ($user->role == "Admin") return redirect()->route('admin.home');
+        }
+    }
+
     public function showLogin() {
         return view('auth.login');
     }
@@ -91,7 +104,8 @@ class UserController extends Controller
             'name' => $name,
             'registration' => $request['registration'],
             'program' => $request['program'],
-            'email' => $email
+            'email' => $email,
+            'fee_balance' => 12
         ]);
 
         if ($student){

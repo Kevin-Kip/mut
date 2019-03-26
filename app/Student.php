@@ -8,5 +8,5 @@ class Student extends Model
 {
     protected $primaryKey = 'student_id';
 
-    protected $fillable = ['name', 'registration', 'program', 'email'];
+    protected $fillable = ['name', 'registration', 'program', 'email', 'fee_balance'];
 }
