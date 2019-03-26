@@ -36,12 +36,11 @@ class UserController extends Controller
      */
     public function signUserIn(Request $request) {
         $this->validate($request,[
-            'reg_no' => 'required|max:30|min:5',
+            'reg_no' => 'required|regex:([a-zA-Z]{2}\s*[0-9]{3}/[0-9]{4}/[0-9]{4})',
             'password'=>'required|min:6|max:12'
         ], [
             'reg_no.required' => "Field is required",
-            'reg_no.min' => "Email is too short",
-            'reg_no.max' => "Email should not exceed 30 characters",
+            'reg_no.regex' =>  "Please match the format SC 212/0736/2015",
             'password.required' => "Password is required",
             'password.min' => "Password should be at least 6 characters",
             'password.max' => "Password cannot exceed 12 characters"
@@ -77,7 +76,7 @@ class UserController extends Controller
         $this->validate($request, [
             'email' => 'required|max:30|min:5',
             'password'=>'required|min:6|max:12',
-            'registration' => 'required|min:15|max:16'
+            'registration' => 'required|regex:([a-zA-Z]{2}\s*[0-9]{3}/[0-9]{4}/[0-9]{4})'
         ],[
             'email.required' => "Email is required",
             'email.min' => "Email is too short",
@@ -85,8 +84,7 @@ class UserController extends Controller
             'password.required' => "Password is required",
             'password.min' => "Password should be at least 6 characters",
             'password.max' => "Password cannot exceed 12 characters",
-            'registration.min' => "Registration number should be at least 15 characters",
-            'registration.max' => "Registration number should not exceed 16 characters"
+            'registration.regex' =>  "Please match the format SC 212/0736/2015"
         ]);
 
         $name = $request['first_name']." ".$request['last_name'];
