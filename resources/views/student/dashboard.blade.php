@@ -49,11 +49,11 @@
             </a>
         </li>
 
-        <li class="nav-item @yield('isStudents')">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-user-circle"></i>
-                <span>Profile</span></a>
-        </li>
+        {{--<li class="nav-item @yield('isStudents')">--}}
+            {{--<a class="nav-link" href="#">--}}
+                {{--<i class="fas fa-fw fa-user-circle"></i>--}}
+                {{--<span>Profile</span></a>--}}
+        {{--</li>--}}
 
         <li class="nav-item @yield('isStudents')">
             @if(session()->has('user'))
@@ -81,10 +81,11 @@
                     <a href="{{ url('/students') }}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">@yield('current-page')</li>
+                <li>{{ session()->get('user')->name }}</li>
             </ol>
 
             @if($transcript[0]->performance == "Pass" && $semester->status == 0
-            && $student->fee_balance < ($semester->fees * 0.75))
+            && $student->fee_balance < ($semester->fees * 0.75) && !$submission)
 
                 <div class="text-white">
                     <form action="{{ route('students.report') }}" method="post">
@@ -92,7 +93,7 @@
                         <input type="hidden" name="student" value="{{ $student->student_id }}">
                         <input type="hidden" name="semester" value="{{ $semester->semester_id }}">
                         <input type="submit" value="Report for Session" class="btn btn-primary" href="#">
-                            <i class="fa fa-plus"></i>
+                        <i class="fa fa-plus"></i>
                     </form>
                 </div>
                 <p></p>
@@ -105,10 +106,13 @@
                         <li>You failed in the last academic year</li>
                     @endif
                     @if($semester->status == 1)
-                        <li>Registartion period for your program has been closed</li>
+                        <li>Registration period for your program has been closed</li>
                     @endif
                     @if($student->fee_balance > ($semester->fees * 0.75))
                         <li>You need to pay at least 75% of school fees and clear previous balances to proceed</li>
+                    @endif
+                    @if($submission)
+                            <li>You have already reported for this semester</li>
                     @endif
                 </ul>
 

@@ -27,7 +27,7 @@
 </nav>
 <div class="container">
     <div class="card card-login mx-auto mt-5">
-        <div class="card-header">SignUp</div>
+        <div class="card-header">Create New Account</div>
         <div class="card-body">
             <form method="post" action="{{ route('user.signup') }}" autocomplete="off">
                 {{ csrf_field() }}

@@ -45,7 +45,7 @@
                         <th>Academic Year</th>
                         <th>Program</th>
                         <th>Semester</th>
-                        <th>Registered Students</th>
+                        {{--<th>Registered Students</th>--}}
                         <th>Status</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -56,7 +56,7 @@
                         <th>Academic Year</th>
                         <th>Program</th>
                         <th>Semester</th>
-                        <th>Registered Students</th>
+                        {{--<th>Registered Students</th>--}}
                         <th>Status</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -69,7 +69,7 @@
                                 <td>{{ $semester->academic_year }}</td>
                                 <td>{{ $semester->program }}</td>
                                 <td>{{ $semester->number }}</td>
-                                <td>65%</td>
+                                {{--<td>65%</td>--}}
                                 <td>
                                     @if ($semester->status == 0)
                                         <span class="badge badge-pill badge-success">Open</span>
