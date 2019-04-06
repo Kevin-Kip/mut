@@ -44,16 +44,16 @@
     <ul class="sidebar navbar-nav">
         <li class="nav-item @yield('isSummary')">
             <a class="nav-link" href="{{ url('/students') }}">
-                <i class="fas fa-fw fa-chart-area"></i>
+                <i class="fas fa-fw fa-home"></i>
                 <span>Home</span>
             </a>
         </li>
 
-        {{--<li class="nav-item @yield('isStudents')">--}}
-            {{--<a class="nav-link" href="#">--}}
-                {{--<i class="fas fa-fw fa-user-circle"></i>--}}
-                {{--<span>Profile</span></a>--}}
-        {{--</li>--}}
+        <li class="nav-item @yield('isStudents')">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-clock"></i>
+                <span>History</span></a>
+        </li>
 
         <li class="nav-item @yield('isStudents')">
             @if(session()->has('user'))
