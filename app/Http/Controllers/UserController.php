@@ -133,5 +133,7 @@ class UserController extends Controller
     public function reset(Request $request)
     {
         $email = $request['email'];
+        $message = "Email has been sent to ".$email;
+        return redirect()->back()->with(['message', $message]);
     }
 }
