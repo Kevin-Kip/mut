@@ -16,16 +16,18 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function index() {
+    public function index()
+    {
         $user = Session::get('user');
         if ($user == null) return redirect()->route('login');
-        else{
+        else {
             if ($user->role == "Student") return redirect()->route('students.home');
             else if ($user->role == "Admin") return redirect()->route('admin.home');
         }
     }
 
-    public function showLogin() {
+    public function showLogin()
+    {
         return view('auth.login');
     }
 
@@ -34,13 +36,14 @@ class UserController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function signUserIn(Request $request) {
-        $this->validate($request,[
+    public function signUserIn(Request $request)
+    {
+        $this->validate($request, [
             'reg_no' => 'required|regex:([a-zA-Z]{2}\s*[0-9]{3}/[0-9]{4}/[0-9]{4})',
-            'password'=>'required|min:6|max:12'
+            'password' => 'required|min:6|max:12'
         ], [
             'reg_no.required' => "Field is required",
-            'reg_no.regex' =>  "Please match the format SC 212/0736/2015",
+            'reg_no.regex' => "Please match the format SC 212/0736/2015",
             'password.required' => "Password is required",
             'password.min' => "Password should be at least 6 characters",
             'password.max' => "Password cannot exceed 12 characters"
@@ -52,9 +55,9 @@ class UserController extends Controller
 
         if (Auth::attempt(['email' => $email, 'password' => $request['password']])) {
             $user = Auth::user();
-            $user = User::where('email','=',$user->email)->first();
-            Session::put('user',$user);
-            if ($user->role == "Admin"){
+            $user = User::where('email', '=', $user->email)->first();
+            Session::put('user', $user);
+            if ($user->role == "Admin") {
                 return redirect()->route('admin.home');
             } else {
                 return redirect()->route('students.home');
@@ -62,7 +65,8 @@ class UserController extends Controller
         }
     }
 
-    public function showRegister() {
+    public function showRegister()
+    {
         $programs = Program::all();
         return view('auth.register')->with(["programs" => $programs]);
     }
@@ -72,22 +76,23 @@ class UserController extends Controller
      * @return array
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function createUser(Request $request) {
+    public function createUser(Request $request)
+    {
         $this->validate($request, [
             'email' => 'required|max:30|min:5',
-            'password'=>'required|min:6|max:12',
+            'password' => 'required|min:6|max:12',
             'registration' => 'required|regex:([a-zA-Z]{2}\s*[0-9]{3}/[0-9]{4}/[0-9]{4})'
-        ],[
+        ], [
             'email.required' => "Email is required",
             'email.min' => "Email is too short",
             'email.max' => "Email should not exceed 30 characters",
             'password.required' => "Password is required",
             'password.min' => "Password should be at least 6 characters",
             'password.max' => "Password cannot exceed 12 characters",
-            'registration.regex' =>  "Please match the format SC 212/0736/2015"
+            'registration.regex' => "Please match the format SC 212/0736/2015"
         ]);
 
-        $name = $request['first_name']." ".$request['last_name'];
+        $name = $request['first_name'] . " " . $request['last_name'];
         $email = $request['email'];
         $password = $request['password'];
 
@@ -97,7 +102,7 @@ class UserController extends Controller
             'password' => bcrypt($password),
             'role' => "Student"
         ]);
-        Session::put('user',$user);
+        Session::put('user', $user);
         $student = Student::create([
             'name' => $name,
             'registration' => $request['registration'],
@@ -106,16 +111,27 @@ class UserController extends Controller
             'fee_balance' => 12
         ]);
 
-        if ($student){
+        if ($student) {
             $semesters = Semester::all();
             return redirect()->route('students.home', compact('semesters'));
         }
         return $request->all();
     }
 
-    public function destroy() {
+    public function destroy()
+    {
         Auth::logout();
         Session::forget('user');
         return redirect()->route('user.signin');
+    }
+
+    public function showReset()
+    {
+        return view('auth.password-reset');
+    }
+
+    public function reset(Request $request)
+    {
+        $email = $request['email'];
     }
 }

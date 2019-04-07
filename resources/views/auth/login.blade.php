@@ -50,7 +50,9 @@
             <div class="text-center">
                 <p></p>
                 <a class="d-block small" href="{{ route('user.signup') }}">Create Account</a>
-                {{--TODO add password reset--}}
+
+                <p></p>
+                <a class="d-block small" href="{{ route('password.reset') }}">Forgot Password? Click Here</a>
             </div>
         </div>
     </div>

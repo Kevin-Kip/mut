@@ -103,3 +103,13 @@ Route::post('/admin/semesters/{id}/delete', [
    'as' => 'semester.delete',
    'uses' => 'SemesterController@destroy'
 ]);
+
+Route::get('/password-reset', [
+    'as' => 'password.reset',
+    'uses' => 'UserController@showReset'
+]);
+
+Route::post('/password-reset', [
+    'as' => 'password.submit',
+    'uses' => 'UserController@reset'
+]);

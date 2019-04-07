@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Admin Login</title>
+    <title>Password Reset</title>
     <!-- Bootstrap core CSS-->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -27,30 +27,26 @@
 </nav>
 <div class="container">
     <div class="card card-login mx-auto mt-5">
-        <div class="card-header">Admin Login</div>
+        <div class="card-header">Reset Password</div>
         <div class="card-body">
-            <form method="post" action="{{ route('admin.signin') }}" autocomplete="off">
+            <form method="post" action="{{ route('password.submit') }}" autocomplete="off">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="form-control" id="email" name="email" type="email" required placeholder="Emial ..." autocomplete="false">
+                    <label for="email">Email Address</label>
+                    <input class="form-control" id="email" name="email" type="email" required placeholder="Email address ..." autocomplete="false">
                     @if($errors->has('email') )
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                     @endif
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input class="form-control" id="password" name="password" type="password" required placeholder="Password" autocomplete="false">
-                    @if($errors->has('password') )
-                        <span class="text-danger">{{ $errors->first('password') }}</span>
-                    @endif
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </form>
 
+                <button type="submit" class="btn btn-primary btn-block">RESET</button>
+            </form>
             <div class="text-center">
                 <p></p>
-                <a class="d-block small" href="{{ route('password.reset') }}">Forgot Password? Click Here</a>
+                <a class="d-block small" href="{{ route('user.signup') }}">Create Account</a>
+
+                <p></p>
+                <a class="d-block small" href="{{ route('user.signin') }}">Go to Login</a>
             </div>
         </div>
     </div>
