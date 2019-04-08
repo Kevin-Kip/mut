@@ -49,11 +49,11 @@
             </a>
         </li>
 
-        <li class="nav-item @yield('isStudents')">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-clock"></i>
-                <span>History</span></a>
-        </li>
+        {{--<li class="nav-item @yield('isStudents')">--}}
+            {{--<a class="nav-link" href="#">--}}
+                {{--<i class="fas fa-fw fa-clock"></i>--}}
+                {{--<span>History</span></a>--}}
+        {{--</li>--}}
 
         <li class="nav-item @yield('isStudents')">
             @if(session()->has('user'))

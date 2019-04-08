@@ -53,11 +53,11 @@
             <i class="fas fa-fw fa-book-open"></i>
             <span>Semesters</span></a>
         </li>
-        <li class="nav-item @yield('isStudents')">
-          <a class="nav-link" href="">
-            <i class="fas fa-fw fa-user-circle"></i>
-            <span>Students</span></a>
-        </li>
+        {{--<li class="nav-item @yield('isStudents')">--}}
+          {{--<a class="nav-link" href="">--}}
+            {{--<i class="fas fa-fw fa-user-circle"></i>--}}
+            {{--<span>Students</span></a>--}}
+        {{--</li>--}}
 
         <li class="nav-item @yield('isStudents')">
           @if(session()->has('user'))
