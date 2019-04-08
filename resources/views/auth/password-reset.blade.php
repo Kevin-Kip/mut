@@ -27,13 +27,24 @@
 </nav>
 <div class="container">
     <div class="card card-login mx-auto mt-5">
+
+        @if(session()->get('message') == "success")
+        <div class="alert alert-success alert-dismissible show" role="alert">
+            <strong>Success!</strong> Saved successfully
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+
         <div class="card-header">Reset Password</div>
         <div class="card-body">
             <form method="post" action="{{ route('password.submit') }}" autocomplete="off">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input class="form-control" id="email" name="email" type="email" required placeholder="Email address ..." autocomplete="false">
+                    <input class="form-control" id="email" name="email" type="email" required
+                           placeholder="Email address ..." autocomplete="false">
                     @if($errors->has('email') )
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                     @endif
@@ -51,20 +62,20 @@
         </div>
     </div>
 </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="{{ asset('vendor/chart.js/Chart.min.js')}}"></script>
-    <script src="{{ asset('vendor/datatables/jquery.dataTables.js')}}"></script>
-    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js')}}"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/sb-admin.min.js')}}"></script>
-    <!-- Custom scripts for this page-->
-    <script src="{{ asset('js/sb-admin-datatables.min.js')}}"></script>
-    <script src="{{ asset('js/sb-admin-charts.js')}}"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- Core plugin JavaScript-->
+<script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+<!-- Page level plugin JavaScript-->
+<script src="{{ asset('vendor/chart.js/Chart.min.js')}}"></script>
+<script src="{{ asset('vendor/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js')}}"></script>
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('js/sb-admin.min.js')}}"></script>
+<!-- Custom scripts for this page-->
+<script src="{{ asset('js/sb-admin-datatables.min.js')}}"></script>
+<script src="{{ asset('js/sb-admin-charts.js')}}"></script>
 </body>
 
 </html>

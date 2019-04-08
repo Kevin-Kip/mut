@@ -8,6 +8,7 @@ use App\Student;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -133,7 +134,13 @@ class UserController extends Controller
     public function reset(Request $request)
     {
         $email = $request['email'];
-        $message = "Email has been sent to ".$email;
+//        Mail::send([
+//            'to' => $email,
+//            'from' => 'admin@system.com',
+//            'subject' => "Password Reset",
+//            'body' => ""]);
+
+        $message = "Email has been sent to " . $email;
         return redirect()->back()->with(['message', $message]);
     }
 }
