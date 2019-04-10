@@ -45,7 +45,6 @@
                         <th>Academic Year</th>
                         <th>Program</th>
                         <th>Semester</th>
-                        {{--<th>Registered Students</th>--}}
                         <th>Status</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -56,7 +55,6 @@
                         <th>Academic Year</th>
                         <th>Program</th>
                         <th>Semester</th>
-                        {{--<th>Registered Students</th>--}}
                         <th>Status</th>
                         <th>Edit</th>
                         <th>Delete</th>

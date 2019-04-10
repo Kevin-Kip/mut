@@ -20,6 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('program');
             $table->float('fee_balance');
+            $table->integer('student_category');
             $table->timestamps();
         });
     }

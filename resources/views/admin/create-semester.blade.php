@@ -22,8 +22,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+        @elseif(session()->get('message') == "existing-error")
+            <div class="alert alert-danger alert-dismissible show" role="alert">
+                <strong>Ooops!</strong> This session already exists.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
     @endif
+
+
     <!-- Example DataTables Card-->
     <div class="card mb-3 col-md-10">
         <div class="card-header">

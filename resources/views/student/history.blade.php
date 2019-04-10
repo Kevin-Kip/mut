@@ -84,54 +84,54 @@
                 <li>{{ session()->get('user')->name }}</li>
             </ol>
 
-            @if($semester == null || $transcript == null)
-                <ul>
-                    @if($semester == null)
-                        <li>There is no open session for your program</li>
-                    @endif
 
-                    @if($transcript == null)
-                        <li>There is no data on your transcript. Contact Admin</li>
-                    @endif
-                </ul>
-            @else
-
-                @if($transcript[0]->performance == "Pass" && $semester->status == 0
-                && $student->fee_balance < ($semester->fees * 0.75) && !$submission)
-
-                    <div class="text-white">
-                        <form action="{{ route('students.report') }}" method="post">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="student" value="{{ $student->student_id }}">
-                            <input type="hidden" name="semester" value="{{ $semester->semester_id }}">
-                            <input type="submit" value="Report for Session" class="btn btn-primary" href="#">
-                            <i class="fa fa-plus"></i>
-                        </form>
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Reporting History</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Program</th>
+                                <th>Academic Year</th>
+                                <th>Semester</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Program</th>
+                                <th>Academic Year</th>
+                                <th>Semester</th>
+                                <th>Status</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            @if("semesters")
+                                @foreach($semesters as $semester)
+                                    <tr>
+                                        <td>{{ $semester->program }}</td>
+                                        <td>{{ $semester->academic_year }}</td>
+                                        <td>{{ $semester->number }}</td>
+                                        <td>
+                                            @if ($semester->status == 0)
+                                                <span class="badge badge-pill badge-success">Open</span>
+                                            @elseif($semester-> status == 1)
+                                                <span class="badge badge-pill badge-danger">Closed</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                        </table>
                     </div>
-                    <p></p>
-
-                @else
-                    <p><strong>You cannot report because:</strong></p>
-
-                    <ul>
-                        @if($transcript[0]->performance == "Fail")
-                            <li>You failed in the last academic year</li>
-                        @endif
-                        @if($semester->status == 1)
-                            <li>Registration period for your program has been closed</li>
-                        @endif
-                        @if($student->fee_balance > ($semester->fees * 0.75))
-                            <li>You need to pay at least 75% of school fees and clear previous balances to proceed</li>
-                        @endif
-                        @if($submission)
-                            <li>You have already reported for this semester</li>
-                        @endif
-                    </ul>
-
-                @endif
-
-            @endif
-            {{--@yield('content')--}}
+                </div>
+                {{--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>TODO--}}
+            </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -155,26 +155,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="#">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>

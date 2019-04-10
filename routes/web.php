@@ -80,6 +80,11 @@ Route::post('/admin/semesters/create', [
     'uses' => 'SemesterController@store'
 ]);
 
+Route::get('/admin/history', [
+    'as' => 'admin.history' ,
+    'uses' => 'AdminController@history'
+]);
+
 Route::get('/admin/semesters/{id}/edit', [
     'as' => 'semester.edit' ,
     'uses' => 'SemesterController@edit'
@@ -92,6 +97,11 @@ Route::post('/admin/semesters/{id}/edit', [
 Route::get('/students', [
     'as' => 'students.home',
     'uses' => 'StudentController@index'
+]);
+
+Route::get('/history', [
+    'as' => 'students.history',
+    'uses' => 'StudentController@history'
 ]);
 
 Route::post('/students', [

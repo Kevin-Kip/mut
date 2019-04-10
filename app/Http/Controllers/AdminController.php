@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Semester;
+use App\Submission;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -77,9 +78,13 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function history()
     {
-        //
+        $submissions = DB::table('semesters')
+            ->orderBy('semester_id', 'desc')
+            ->leftJoin('submissions', 'semester_id', '=', 'submissions.semester')
+            ->get();
+        return view('admin.students')->with(['semesters'=>$submissions]);;
     }
 
     /**

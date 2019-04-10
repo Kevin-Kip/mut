@@ -34,7 +34,8 @@
 
                 <div class="form-group row">
                     {{--<label for="first_name">First Name</label>--}}
-                    <input class="form-control col-md-6" id="first_name" name="first_name" type="text" required autofocus placeholder="First Name ..." autocomplete="false">
+                    <input class="form-control col-md-6" id="first_name" name="first_name" type="text" required
+                           autofocus placeholder="First Name ..." autocomplete="false">
                     @if($errors->has('first_name') )
                         <span class="text-danger">{{ $errors->first('first_name') }}</span>
                     @endif
@@ -42,23 +43,25 @@
                     <span>    </span>
 
                     {{--<label for="last_name">Last Name</label>--}}
-                    <input class="form-control col-md-6" id="last_name" name="last_name" type="text" required placeholder="Last Name ..." autocomplete="false">
+                    <input class="form-control col-md-6" id="last_name" name="last_name" type="text" required
+                           placeholder="Last Name ..." autocomplete="false">
                     @if($errors->has('last_name') )
                         <span class="text-danger">{{ $errors->first('last_name') }}</span>
                     @endif
                 </div>
 
                 {{--<div class="form-group">--}}
-                    {{--<label for="last_name">Last Name</label>--}}
-                    {{--<input class="form-control" id="last_name" name="last_name" type="text" required placeholder="Last Name ..." autocomplete="false">--}}
-                    {{--@if($errors->has('last_name') )--}}
-                        {{--<span class="text-danger">{{ $errors->first('last_name') }}</span>--}}
-                    {{--@endif--}}
+                {{--<label for="last_name">Last Name</label>--}}
+                {{--<input class="form-control" id="last_name" name="last_name" type="text" required placeholder="Last Name ..." autocomplete="false">--}}
+                {{--@if($errors->has('last_name') )--}}
+                {{--<span class="text-danger">{{ $errors->first('last_name') }}</span>--}}
+                {{--@endif--}}
                 {{--</div>--}}
 
                 <div class="form-group">
                     <label for="registration">Registration Number</label>
-                    <input class="form-control" id="registration" name="registration" type="text" required placeholder="e.g SC 212/0700/2020" autocomplete="false">
+                    <input class="form-control" id="registration" name="registration" type="text" required
+                           placeholder="e.g SC 212/0700/2020" autocomplete="false">
                     @if($errors->has('name') )
                         <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
@@ -67,7 +70,7 @@
                 <div class="form-group">
                     <label for="program">Program:</label>
                     <select class="form-control" name="program" id="program" required autofocus>
-                        <option disabled selected value> -- select an option -- </option>
+                        <option disabled selected value> -- select an option --</option>
                         @foreach($programs as $program)
                             <option value="{{ $program->name }}">{{ $program->name }}</option>
                         @endforeach
@@ -78,8 +81,21 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="student_category">Student Category:</label>
+                    <select class="form-control" name="student_category" id="student_category" required>
+                        <option disabled selected value> -- select an option -- </option>
+                        <option value="1">Government Sponsored</option>
+                        <option value="2">Self Sponsored</option>
+                    </select>
+                    @if($errors->has('student_category') )
+                        <span class="text-danger">{{ $errors->first('student_category') }}</span>
+                    @endif
+                </div>
+
+                <div class="form-group">
                     <label for="email">Email address</label>
-                    <input class="form-control" id="email" name="email" type="email" aria-describedby="emailHelp" required placeholder="Enter email" autocomplete="false">
+                    <input class="form-control" id="email" name="email" type="email" aria-describedby="emailHelp"
+                           required placeholder="Enter email" autocomplete="false">
                     @if($errors->has('email') )
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                     @endif
@@ -87,7 +103,8 @@
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input class="form-control" id="password" name="password" type="password" required placeholder="Password" autocomplete="false">
+                    <input class="form-control" id="password" name="password" type="password" required
+                           placeholder="Password" autocomplete="false">
                     @if($errors->has('password') )
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     @endif

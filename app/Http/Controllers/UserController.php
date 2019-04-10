@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Program;
 use App\Semester;
 use App\Student;
+use App\Transcript;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -104,12 +105,14 @@ class UserController extends Controller
             'role' => "Student"
         ]);
         Session::put('user', $user);
+
         $student = Student::create([
             'name' => $name,
             'registration' => $request['registration'],
             'program' => $request['program'],
             'email' => $email,
-            'fee_balance' => 12
+            'fee_balance' => 12,
+            'student_category' => $request['student_category']
         ]);
 
         if ($student) {

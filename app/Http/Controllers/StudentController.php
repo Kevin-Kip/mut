@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Semester;
 use App\Student;
 use App\Submission;
+use function Composer\Autoload\includeFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -19,10 +20,21 @@ class StudentController extends Controller
     public function index()
     {
         $user = Session::get('user');
-        $student = Student::where('email',$user->email)->first();
-        $semester = Semester::where(['program' => $student->program, 'status' => 0])->first();
-        $transcript = DB::table('transcripts')->orderBy('created_at', 'desc')->get();
-        $submission = Submission::where(['student'=>$student->student_id, 'semester'=>$semester->semester_id])->first();
+        if ($user) $student = Student::where('email',$user->email)->first();
+        else return redirect()->back();
+
+        $semester = DB::table('semesters')
+            ->where('program','=',$student->program)
+            ->where('student_category', '=', $student->student_category)
+            ->where('status','=', 0)
+            ->first();
+
+        $transcript = DB::table('transcripts')
+            ->where('student', '=', $student->student_id)
+            ->first();
+        if($semester != null){
+            $submission = Submission::where(['student'=>$student->student_id, 'semester'=>$semester->semester_id])->first();
+        } else $submission = null;
         return view('student.dashboard')->with(['submission'=>$submission, 'student'=>$student, 'semester'=>$semester, 'transcript'=>$transcript]);
     }
 
@@ -31,9 +43,16 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function history()
     {
-        //
+        $email = (Session::get('user'))->email;
+        $student = Student::where('email', $email)->first();
+        $submissions = DB::table('semesters')
+            ->where('student', '=', $student->student_id)
+            ->orderBy('semester_id', 'desc')
+            ->leftJoin('submissions', 'semester_id', '=', 'submissions.semester')
+            ->get();
+        return view('student.history')->with(['semesters'=>$submissions]);
     }
 
     /**

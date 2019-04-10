@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Program;
 use App\Semester;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SemesterController extends Controller
 {
@@ -62,6 +63,15 @@ class SemesterController extends Controller
         if ($start_date >= $end_date){
             return redirect()->back()->with(['message' => "date-error"]);
         } else {
+            $existing = DB::table('semesters')
+                ->where('program','=',$program)
+                ->where('academic_year', '=', $academic_year)
+                ->where('number', '=', $semester_no)
+                ->where('student_category','=', $student_category)
+                ->first();
+            if ($existing){
+                return redirect()->back()->with(['message' => "existing-error"]);
+            }
             $semester = Semester::create([
                 'academic_year' => $academic_year,
                 'status' => $status,
