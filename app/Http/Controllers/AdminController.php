@@ -21,8 +21,12 @@ class AdminController extends Controller
     {
         $activeSems = Semester::where('status','=',0)->count();
         $semesters = DB::table('semesters')->take(3)->get();
+        $studentCount = DB::table('submissions')
+            ->leftJoin('semesters', 'semester_id', '=','submissions.semester')
+            ->count();
 //        return $semesters;
-        return view('admin.dashboard')->with(['activeSems' => $activeSems, 'semesters' => $semesters]);
+        return view('admin.dashboard')
+            ->with(['activeSems' => $activeSems, 'semesters' => $semesters, 'studentCount' => $studentCount]);
     }
 
     public function showAdminLogin() {
