@@ -96,7 +96,7 @@
                 </ul>
             @else
 
-                @if($transcript[0]->performance == "Pass" && $semester->status == 0
+                @if($transcript->performance == "Pass" && $semester->status == 0
                 && $student->fee_balance < ($semester->fees * 0.75) && !$submission)
 
                     <div class="text-white">
@@ -114,7 +114,7 @@
                     <p><strong>You cannot report because:</strong></p>
 
                     <ul>
-                        @if($transcript[0]->performance == "Fail")
+                        @if($transcript->performance == "Fail")
                             <li>You failed in the last academic year</li>
                         @endif
                         @if($semester->status == 1)
